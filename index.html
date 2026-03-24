@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+
+<style>
+:root {
+    --primary: #ff7a00;
+    --secondary: #ffb347;
+    --bg: #fff8f3;
+    --text: #333;
+}
+
+body.dark {
+    --bg: #1e1e1e;
+    --text: #f5f5f5;
+}
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Navbar */
+header {
+    background: var(--primary);
+    padding: 15px;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+#darkModeToggle {
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Sections */
+.section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.home {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+body.dark .card {
+    background: #2c2c2c;
+}
+
+/* Form */
+form {
+    max-width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea {
+    margin: 10px 0;
+    padding: 10px;
+}
+
+/* Animation */
+.fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.6s;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <nav>
+        <h2>Cyron</h2>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#hobbies">Hobbies</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button id="darkModeToggle">🌙</button>
+    </nav>
+</header>
+
+<section id="home" class="section home fade">
+    <h1>Hello!</h1>
+    <p>Welcome to my portfolio 😊 </p>
+    <button onclick="scrollToSection('about')">Learn More</button>
+</section>
+
+<section id="about" class="section fade">
+    <h2>About Me</h2>
+    <p>I enjoy creating websites and learning new technologies.</p>
+</section>
+
+<section id="hobbies" class="section fade">
+    <h2>Hobbies</h2>
+    <div class="cards">
+        <div class="card">🎮 Gaming</div>
+        <div class="card">🎵 Music</div>
+        <div class="card">📚 Reading</div>
+        <div class="card">💻 Coding</div>
+    </div>
+</section>
+
+<section id="contact" class="section fade">
+    <h2>Contact</h2>
+    <form id="form">
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <textarea placeholder="Message"></textarea>
+        <button type="submit">Send</button>
+    </form>
+    <p id="msg"></p>
+</section>
+
+<footer style="text-align:center; padding:20px; background:#ff7a00; color:white;">
+   @Cyron | Portfolio
+</footer>
+
+<script>
+// Scroll
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+// Dark mode
+document.getElementById("darkModeToggle").onclick = () => {
+    document.body.classList.toggle("dark");
+};
+
+// Form
+document.getElementById("form").addEventListener("submit", e=>{
+    e.preventDefault();
+    document.getElementById("msg").textContent = "Message sent! 🎉";
+});
+
+// Fade animation
+const elements = document.querySelectorAll(".fade");
+
+window.addEventListener("scroll", () => {
+    elements.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if(top < window.innerHeight - 50){
+            el.classList.add("show");
+        }
+    });
+});
+</script>
+
+</body>
+</html>
